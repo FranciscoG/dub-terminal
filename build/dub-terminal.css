@@ -1,0 +1,42 @@
+.dubterm-container {
+  position: fixed;
+  left: 0;
+  bottom: 56px;
+  bottom: 3.5rem;
+  z-index: 18;
+  max-width: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+
+.dubterm-toggle {
+  width: 40px;
+  height: 40px;
+  border: none; }
+
+.dubterm-main {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 auto;
+          flex: 1 0 auto; }
+
+/* The input container */
+.dubterm-input-c {
+  position: relative;
+  width: 100%;
+  height: 50px; }
+
+.dubterm-input-c span {
+  position: absolute;
+  display: block;
+  height: 100%; }
+
+.dubterm-input-c input {
+  border: none;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: #ccc; }

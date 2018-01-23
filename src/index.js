@@ -24,10 +24,10 @@ single line results, no scrolling. This is a very simplified terminal
 var user = Dubtrack.session.get('username');
 
 */
-import './dub_term.scss';
+import './dub-terminal.scss';
 import { h, render, Component } from 'preact';
 
-class DubTerminal extends Component {
+class DubTerminalComponent extends Component {
   
   componentWillMount() {
     // load css file
@@ -50,4 +50,4 @@ class DubTerminal extends Component {
 }
 
 // preact APPENDs by default 
-render(<DubTerminal />, document.body);
+render(<DubTerminalComponent />, document.body);

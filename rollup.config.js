@@ -1,9 +1,11 @@
 import resolve from 'rollup-plugin-node-resolve';
 import babel from 'rollup-plugin-babel';
 import uglify from 'rollup-plugin-uglify';
-import sass from 'rollup-plugin-sass';
+import scss from 'rollup-plugin-scss'
 import autoprefixer from 'autoprefixer'
 import postcss from 'postcss'
+import { writeFileSync } from 'fs'
+const prefixer = postcss([ autoprefixer ]);
 
 export default {
   input: 'src/index.js',
@@ -19,19 +21,14 @@ export default {
   },
   plugins: [
     resolve(),
+    scss({
+      output : function(css,styles){
+        writeFileSync('build/dub-terminal.css', prefixer.process(css))
+      }
+    }),
     babel({
       exclude: 'node_modules/**' // only transpile our source code
     }),
-    uglify(),
-    sass({
-      // output: true,
-      // include: ['./src/dub_term.scss'],
-      processor: css => postcss([autoprefixer])
-        .process(css)
-        .then(result => {
-          console.log(result.css);
-          writeFileSync('build/dub-terminal.css', result.css);
-        })
-    })
+    uglify()
   ]
 };
