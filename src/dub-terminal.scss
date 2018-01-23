@@ -17,41 +17,66 @@ $blue:      #268bd2;
 $cyan:      #2aa198;
 $green:     #859900;
 
+$fontFam : Consolas, monaco, monospace, 'Courier New';
+$fontSize : 13px;
+$width : 500px;
+$height : 80px;
+
 .dubterm-container {
   position: fixed;
   left: 0;
   bottom: 56px;
   bottom: 3.5rem;
   z-index: 18;
-  max-width: 400px;
+  width: $width;
   display: flex;
   flex-direction: row;
+  color:$base0;
+  transition: transform 0.3s;
+  transform: translate(-($width - 40px), 0);
+  height: $height;
+}
+
+.dubterm-open {
+  transform: translate(0, 0);
 }
 
 .dubterm-toggle {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: ( $height / 2 );
   border: none;
+  background-color: #000;
+  cursor: pointer;
+  align-self: flex-end;
 }
 
 
 .dubterm-main {
   flex: 1 0 auto;
   background-color: $base03;
+  font-family: $fontFam;
+  font-size: $fontSize;
 }
 
 .dubterm-results {
-
+  min-height: 12px;
+  padding: 5px;
+  background-color: $base02;
+  height: ( $height / 2 );
 }
 
 /* The input container */
 .dubterm-input-c {
   position: relative;
   width: 100%;
-  height: 50px;
+  height: ( $height / 2 );
 }
+
 .dubterm-input-c span {
   position: absolute;
+  width: 10px;
+  left: 11px;
+  top: 10px;
   display: block;
   height: 100%;
 }
@@ -61,4 +86,7 @@ $green:     #859900;
   height: 100%;
   background-color: black;
   color: #ccc;
+  font-family: $fontFam;
+  font-size: $fontSize;
+  padding: 0 0 0 20px;
 }

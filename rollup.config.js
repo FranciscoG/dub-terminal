@@ -23,7 +23,9 @@ export default {
     resolve(),
     scss({
       output : function(css,styles){
+        // console.log(styles);
         writeFileSync('build/dub-terminal.css', prefixer.process(css))
+        writeFileSync('src/style-string.js', 'export default \`'+ prefixer.process(css) +'\`;');
       }
     }),
     babel({

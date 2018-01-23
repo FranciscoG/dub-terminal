@@ -1,4 +1,4 @@
-.dubterm-container {
+export default `.dubterm-container {
   position: fixed;
   left: 0;
   bottom: 56px;
@@ -71,3 +71,4 @@
   font-family: Consolas, monaco, monospace, "Courier New";
   font-size: 13px;
   padding: 0 0 0 20px; }
+`;
