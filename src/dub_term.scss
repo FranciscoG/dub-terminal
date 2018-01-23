@@ -1,0 +1,63 @@
+// colors based on Solarized Dark
+// http://ethanschoonover.com/solarized
+$base03:    #002b36;
+$base02:    #073642;
+$base01:    #586e75;
+$base00:    #657b83;
+$base0:     #839496;
+$base1:     #93a1a1;
+$base2:     #eee8d5;
+$base3:     #fdf6e3;
+$yellow:    #b58900;
+$orange:    #cb4b16;
+$red:       #dc322f;
+$magenta:   #d33682;
+$violet:    #6c71c4;
+$blue:      #268bd2;
+$cyan:      #2aa198;
+$green:     #859900;
+
+.dubterm-container {
+  position: fixed;
+  left: 0;
+  bottom: 56px;
+  bottom: 3.5rem;
+  z-index: 18;
+  max-width: 400px;
+  display: flex;
+  flex-direction: row;
+}
+
+.dubterm-toggle {
+  width: 40px;
+  height: 40px;
+  border: none;
+}
+
+
+.dubterm-main {
+  flex: 1 0 auto;
+}
+
+.dubterm-results {
+
+}
+
+/* The input container */
+.dubterm-input-c {
+  position: relative;
+  width: 100%;
+  height: 50px;
+}
+.dubterm-input-c span {
+  position: absolute;
+  display: block;
+  height: 100%;
+}
+.dubterm-input-c input {
+  border: none;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: #ccc;
+}
