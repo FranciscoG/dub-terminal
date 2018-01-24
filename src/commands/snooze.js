@@ -19,5 +19,5 @@ export default function() {
     result.warning = 'mute is already on. if you did not turn it on via snooze, unmute before snoozing';
   }
 
-  return Object.assign({}, metadata, result);
+  return Promise.resolve( Object.assign({}, metadata, result) );
 }

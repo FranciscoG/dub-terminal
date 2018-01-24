@@ -56,19 +56,21 @@ $height : 80px;
   background-color: $base03;
   font-family: $fontFam;
   font-size: $fontSize;
+  position: relative;
 }
 
 .dubterm-results {
-  min-height: 12px;
   padding: 11px 18px;
   background-color: $base02;
-  height: ( $height / 2 );
+  min-height: ( $height / 2 );
+  width: 100%;
   overflow: hidden;
   overflow-y: auto;
   border-top: 1px solid $base1;
   border-right: 1px solid $base1;
   border-bottom: 1px solid $base1;
-
+  position: absolute;
+  bottom: ( $height / 2 );
   p {
     margin: 0;
   }
@@ -87,7 +89,9 @@ $height : 80px;
 
 /* The input container */
 .dubterm-input-c {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: ( $height / 2 );
 }

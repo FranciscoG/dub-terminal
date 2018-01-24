@@ -40,18 +40,21 @@ export default `.dubterm-container {
           flex: 1 0 auto;
   background-color: #002b36;
   font-family: Consolas, monaco, monospace, "Courier New";
-  font-size: 13px; }
+  font-size: 13px;
+  position: relative; }
 
 .dubterm-results {
-  min-height: 12px;
   padding: 11px 18px;
   background-color: #073642;
-  height: 40px;
+  min-height: 40px;
+  width: 100%;
   overflow: hidden;
   overflow-y: auto;
   border-top: 1px solid #93a1a1;
   border-right: 1px solid #93a1a1;
-  border-bottom: 1px solid #93a1a1; }
+  border-bottom: 1px solid #93a1a1;
+  position: absolute;
+  bottom: 40px; }
   .dubterm-results p {
     margin: 0; }
 
@@ -61,9 +64,14 @@ export default `.dubterm-container {
 .dubterm-results__success {
   color: #2aa198; }
 
+.dubterm-results__warning {
+  color: #b58900; }
+
 /* The input container */
 .dubterm-input-c {
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: 40px; }
 

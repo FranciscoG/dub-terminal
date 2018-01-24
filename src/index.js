@@ -4,6 +4,7 @@
 
 import { h, render, Component } from 'preact';
 import commands from './commands';
+import playlists from './utils/playlists.js';
 
 /** 
 * SaSS
@@ -56,26 +57,37 @@ class DubTerminalComponent extends Component {
     }
   }
 
-  parseInput(txt) {
-    let data = txt.split(' ');
-    let action = data.shift();
+  checkCommands(action, data) {
     if (commands[action]) {
       return commands[action](data);
     } else {
-      return {
-        error: `${action} is not a recognized command`
-      };
+      return Promise.reject(`${action} is not a recognized command`);
     }
+  }
+
+  onEnter(val) {
+    let data = val.split(' ');
+    let action = data.shift();
+
+    if (action === 'clear') {
+      this.results.innerHTML = "";
+      return;
+    }
+
+    this.checkCommands(action, data)
+      .then((result)=>{
+        this.setState( { result } );
+      })
+      .catch((error)=>{
+        this.setState( { result : {error}  } );
+      });
   }
 
   checkInput(e) {
     if (e.keyCode === 13) {
       e.preventDefault();
       if (e.target.value === '') { return; }
-
-      let result = this.parseInput(e.target.value);
-      this.setState( { result } );
-      
+      this.onEnter(e.target.value);
       e.target.value = '';
     }
   }
@@ -85,7 +97,7 @@ class DubTerminalComponent extends Component {
     return (
       <div id="dub-terminal" className={containerClass}>
         <div className="dubterm-main">
-          <div className="dubterm-results">
+          <div className="dubterm-results" ref={e=>this.results=e}>
             <ResultMessage {...state.result} />
           </div>
           <div className="dubterm-input-c">

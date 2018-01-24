@@ -17,5 +17,5 @@ export default function() {
     result.success = 'mute ON';
   }
 
-  return Object.assign({}, metadata, result);
+  return Promise.resolve( Object.assign({}, metadata, result) );
 }
