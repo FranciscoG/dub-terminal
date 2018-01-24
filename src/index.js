@@ -70,7 +70,7 @@ class DubTerminalComponent extends Component {
     let action = data.shift();
 
     if (action === 'clear') {
-      this.results.innerHTML = "";
+      this.setState({result : null });
       return;
     }
 
