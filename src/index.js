@@ -25,6 +25,9 @@ function ResultMessage (props) {
   if (props.info) {
     return <p className="dubterm-results__info">{props.info}</p>
   }
+  if (props.warning) {
+    return <p className="dubterm-results__warning">{props.warning}</p>
+  }
   return null;
 }
 
