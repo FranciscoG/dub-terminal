@@ -1,32 +1,48 @@
-/**
-TODO:
-setup
-on page load, get all current users playlists names and ID and create an object of them
-var user = Dubtrack.session.get('username');
-*/
+/****************************************
+ * Dub Terminal
+ */
 
-import './dub-terminal.scss';
 import { h, render, Component } from 'preact';
+import commands from './commands';
+
+/** 
+* SaSS
+*/
+import './dub-terminal.scss';
 import styles from './style-string.js';
+render((
+  <style id="dub-terminal-css">{styles}</style>
+), document.querySelector('head'));
+
+
+function ResultMessage (props) {
+  if (props.error) {
+    return <p className="dubterm-results__error">{props.error}</p>
+  }
+  if (props.success) {
+    return <p className="dubterm-results__success">{props.success}</p>
+  } 
+  if (props.info) {
+    return <p className="dubterm-results__info">{props.info}</p>
+  }
+  return null;
+}
 
 class DubTerminalComponent extends Component {
   constructor() {
     super();
-    // set initial time:
     this.state = { 
-      results : '',
-      toggleCss : 'dubterm-open'
+      toggleCss : 'dubterm-open',
+      result : { info : 'hi ' + Dubtrack.session.get('username') }
     };
     this.toggleTerminal = this.toggleTerminal.bind(this);
     this.checkInput = this.checkInput.bind(this);
   }
 
-  componentWillMount() {
-    // load CSS into a <style> tag into head
-    var newStyleTag = document.createElement('style');
-    newStyleTag.innerHTML = styles;
-    newStyleTag.id="dub-terminal-css";
-    document.head.appendChild(newStyleTag);
+  componentDidMount() {
+    setTimeout(()=>{
+      this.setState({toggleCss : ''});
+    }, 1500);
   }
 
   toggleTerminal (e) {
@@ -37,16 +53,26 @@ class DubTerminalComponent extends Component {
     }
   }
 
+  parseInput(txt) {
+    let data = txt.split(' ');
+    let action = data.shift();
+    if (commands[action]) {
+      return commands[action](data);
+    } else {
+      return {
+        error: `${action} is not a recognized command`
+      };
+    }
+  }
+
   checkInput(e) {
     if (e.keyCode === 13) {
-      console.log(e);
       e.preventDefault();
       if (e.target.value === '') { return; }
-      // grab value
-      // send value to be process
-      // clear input
-      console.log(e.target.value);
-      this.setState({results : e.target.value});
+
+      let result = this.parseInput(e.target.value);
+      this.setState( { result } );
+      
       e.target.value = '';
     }
   }
@@ -56,7 +82,9 @@ class DubTerminalComponent extends Component {
     return (
       <div id="dub-terminal" className={containerClass}>
         <div className="dubterm-main">
-          <div className="dubterm-results">{state.results}</div>
+          <div className="dubterm-results">
+            <ResultMessage {...state.result} />
+          </div>
           <div className="dubterm-input-c">
             <input onKeyUp={this.checkInput} type="text" id="dubterm-input" />
             <span>&gt;</span>
@@ -64,11 +92,12 @@ class DubTerminalComponent extends Component {
         </div>
         <button 
           onClick={this.toggleTerminal}
-          className="dubterm-toggle"><span>&gt;_</span></button>
+          className="dubterm-toggle">
+            <span>&gt;_</span>
+        </button>
       </div>
     );
   }
 }
 
-// preact APPENDs by default 
 render(<DubTerminalComponent />, document.body);

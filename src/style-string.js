@@ -2,7 +2,7 @@ export default `.dubterm-container {
   position: fixed;
   left: 0;
   bottom: 56px;
-  bottom: 3.5rem;
+  bottom: 3.6rem;
   z-index: 18;
   width: 500px;
   display: -webkit-box;
@@ -44,9 +44,22 @@ export default `.dubterm-container {
 
 .dubterm-results {
   min-height: 12px;
-  padding: 5px;
+  padding: 11px 18px;
   background-color: #073642;
-  height: 40px; }
+  height: 40px;
+  overflow: hidden;
+  overflow-y: auto;
+  border-top: 1px solid #93a1a1;
+  border-right: 1px solid #93a1a1;
+  border-bottom: 1px solid #93a1a1; }
+  .dubterm-results p {
+    margin: 0; }
+
+.dubterm-results__error {
+  color: #dc322f; }
+
+.dubterm-results__success {
+  color: #2aa198; }
 
 /* The input container */
 .dubterm-input-c {
@@ -57,7 +70,7 @@ export default `.dubterm-container {
 .dubterm-input-c span {
   position: absolute;
   width: 10px;
-  left: 11px;
+  left: 10px;
   top: 10px;
   display: block;
   height: 100%; }
