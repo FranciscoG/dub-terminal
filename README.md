@@ -21,17 +21,23 @@ grab [play_list_name] - grabs the current song and puts it in the playlist provi
 
 mute - turns ON mute
 
-snooze - mutes only the current song
+snooze - mutes only the current song, does not work if mute is already on
 
 unmute - turns OFF mute and cancels snooze if on
 
 playlists - list your playlists
 
+playlists [name] - create a new playlist
+
 afk - toggle  Dub+ AFK option
 
-fullscreen - toggle  Dub+ fullscreen option
+afk [message] - update your AFK message
 
+### Also
 
+Pressing up/down traverses through history of commands (last 30)
+
+more to come!
 
 ## Development
 

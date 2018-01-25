@@ -2,33 +2,8 @@
  * Grab
  * add current playing song to a user's playlist
  */
-
-import playlists from "../utils/playlists.js";
-var _list = {};
-var _listCount = 0;
-var currentSong = null;
-
-// load playlists on load
-playlists
-  .fetch()
-  .then(function(data) {
-    _listCount = data.length;
-    data.forEach(function(el) {
-      _list[el.name] = el;
-    });
-  })
-  .catch(function(err) {
-    console.error(err);
-  });
-
-// fetch current song on load
-Dubtrack.room.player.activeSong.fetch().done(function(d) {
-  currentSong = d.data;
-});
-// always update current song
-Dubtrack.Events.on("realtime:room_playlist-update", function(e) {
-  currentSong = e;
-});
+import userData from '../utils/user-data.js';
+import playlists from '../utils/playlists.js';
 
 const metadata = {
   command: "grab"
@@ -41,10 +16,13 @@ export default function(data) {
   }
 
   let playListName = data.join(" ").trim();
-  if (_list[playListName]) {
-    let pID = _list[playListName]._id;
-    let sID = currentSong.songInfo._id;
-    let songName = currentSong.songInfo.name;
+  let _list = userData.playlists[playListName];
+  let song = userData.currentSong;
+
+  if (_list) {
+    let pID = _list._id;
+    let sID = song.songInfo._id;
+    let songName = song.songInfo.name;
 
     return new Promise(function(resolve,reject){
       playlists

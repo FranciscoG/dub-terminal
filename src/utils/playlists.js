@@ -34,7 +34,33 @@ function addToPlaylist(songName, playListName, playlistID, songID) {
   });
 }
 
+function createNewPlayList(playlistName) {
+  return new Promise(function(resolve, reject){
+    $.post( api, 
+      { 
+        created :	null,
+        isPublic : false,
+        name : playlistName,
+        status : null,
+        totalItems : 0,
+        userid: null 
+      })
+      .done(function(resp) {
+        console.log('create new playlist success',resp);
+        if (resp.code === 200) {
+          resolve(`New playlist ${playlistName} created`);
+        } else {
+          reject('error creating playlist, check console for issues');
+        }
+      })
+      .fail(function(error) {
+        reject('error creating playlist');
+      })
+  });
+}
+
 export default {
   fetch : fetchUserPlaylists,
-  add : addToPlaylist
+  add : addToPlaylist,
+  new : createNewPlayList
 }

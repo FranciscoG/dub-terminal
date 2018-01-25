@@ -9,16 +9,28 @@ const metadata = {
   command: "playlists"
 }
 
-export default function myPlaylists() {
-  
+export default function myPlaylists(data) {
+  // create a new playlist
+  if (data && data.length > 0) {
+    return new Promise(function(resolve, reject){
+      playlists
+        .new( data.join(" ").trim() )
+        .then(function(msg) {
+          resolve( Object.assign( {}, metadata, {success: msg }) );
+        })
+        .catch(function(err) {
+          reject(err);
+        });
+    });
+  }
+
+  // get a list of user's playlist by name in alpha order
   return new Promise(function(resolve, reject){
-     // load playlists on load
     playlists
       .fetch()
       .then(function(data) {
         var list = data.map(el => el.name);
-        console.log(list);
-        resolve( Object.assign( {}, metadata, {success: list.join(", ") }) );
+        resolve( Object.assign( {}, metadata, {success: list.sort().join(", ") }) );
       })
       .catch(function(err) {
         reject(err);

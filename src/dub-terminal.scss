@@ -85,7 +85,17 @@ $height : 80px;
 .dubterm-results__warning{
   color: $yellow;
 } 
-
+.dubterm-results__thinking {
+  animation: 1s blink step-end infinite;
+}
+@keyframes blink {
+  from, to {
+    color: inherit;
+  }
+  50% {
+    color: $base02;
+  }
+}
 
 /* The input container */
 .dubterm-input-c {
