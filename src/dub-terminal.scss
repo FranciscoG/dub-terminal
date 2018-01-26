@@ -87,13 +87,14 @@ $height : 80px;
 } 
 .dubterm-results__thinking {
   animation: 1s blink step-end infinite;
+  will-change: color;
 }
 @keyframes blink {
   from, to {
     color: inherit;
   }
   50% {
-    color: $base02;
+    color: transparent;
   }
 }
 

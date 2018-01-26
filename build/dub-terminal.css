@@ -69,19 +69,20 @@
 
 .dubterm-results__thinking {
   -webkit-animation: 1s blink step-end infinite;
-          animation: 1s blink step-end infinite; }
+          animation: 1s blink step-end infinite;
+  will-change: color; }
 
 @-webkit-keyframes blink {
   from, to {
     color: inherit; }
   50% {
-    color: #073642; } }
+    color: transparent; } }
 
 @keyframes blink {
   from, to {
     color: inherit; }
   50% {
-    color: #073642; } }
+    color: transparent; } }
 
 /* The input container */
 .dubterm-input-c {

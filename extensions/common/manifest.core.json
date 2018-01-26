@@ -1,0 +1,42 @@
+{
+  "manifest_version": 2,
+  "name": "Dub-Terminal",
+  "short_name": "Dub-Terminal",
+  "author": "Dub+ Devs",
+  "description": "Dub Terminal, interact with Dubtrack.fm & Dub+ with a mini pseudo-terminal-like embedded window",
+  "homepage_url": "https://github.com/FranciscoG/dub-terminal",
+  "browser_action": {
+    "default_icon": "icons/48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.dubtrack.fm/join/*"
+      ],
+      "js": [
+        "scripts/loader.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "icons": {
+    "16": "icons/18.png",
+    "19": "icons/19.png",
+    "38": "icons/38.png",
+    "48": "icons/48.png",
+    "96": "icons/96.png",
+    "128": "icons/128.png"
+  },
+  "web_accessible_resources": [
+    "scripts/dub-terminal.js",
+    "scripts/dub-terminal.js.map"
+  ],
+  "permissions": [
+    "http://dubtrack.fm/*",
+    "https://dubtrack.fm/*",
+    "http://*.dubtrack.fm/*",
+    "https://*.dubtrack.fm/*",
+    "https://www.google-analytics.com/",
+    "storage"
+  ]
+}
