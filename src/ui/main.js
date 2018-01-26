@@ -1,8 +1,9 @@
 import { h, Component } from 'preact';
 import ResultMessage from './results.js';
 import commands from '../commands';
+import cmdHistory from '../utils/history.js';
 
-// Key constants
+// keyUp/keyDown event.keyCode constants
 const UP      = 38;
 const DOWN    = 40;
 const ENTER   = 13;
@@ -12,8 +13,6 @@ const TAB     = 9;
 export default class DubTerminalComponent extends Component {
   constructor() {
     super();
-    this.history = [];
-    this.historyIndex = 0;
     this.state = { 
       toggleOpen : 'dubterm-open',
       result : { info : `hi ${Dubtrack.session.get('username')}!` }
@@ -21,15 +20,6 @@ export default class DubTerminalComponent extends Component {
     this.toggleTerminal = this.toggleTerminal.bind(this);
     this.keyUp = this.keyUp.bind(this);
     this.keyDown = this.keyDown.bind(this);
-  }
-
-  updateHistory(txt) {
-    this.history.push(txt);
-    if (this.history.length > 30) {
-      this.history.shift();
-    }
-    // reset the index to point to newly added item in array
-    this.historyIndex = this.history.length - 1;
   }
 
   componentDidMount() {
@@ -55,6 +45,7 @@ export default class DubTerminalComponent extends Component {
   }
 
   onEnter(val) {
+    cmdHistory.insert(val);
     let data = val.split(' ');
     let action = data.shift();
 
@@ -73,21 +64,11 @@ export default class DubTerminalComponent extends Component {
   }
 
   onUp(e) {
-    if (this.history.length > 0) {
-      e.target.value = this.history[this.historyIndex];
-      if (this.historyIndex > 0) {
-        this.historyIndex--;
-      }
-    }
+    e.target.value = cmdHistory.back();
   }
 
   onDown(e) {
-    if (this.history.length > 0) {
-      if (this.historyIndex < this.history.length - 1) {
-        this.historyIndex++;
-      }
-      e.target.value = this.history[this.historyIndex];
-    }
+    e.target.value = cmdHistory.forward();
   }
 
   keyDown(e) {
@@ -105,8 +86,7 @@ export default class DubTerminalComponent extends Component {
     if (e.keyCode === ENTER) {
       e.preventDefault();
       if (e.target.value === '') { return; }
-      this.setState( { result : { thinking:true } })
-      this.updateHistory(e.target.value);
+      this.setState( { result : { thinking:true } });
       this.onEnter(e.target.value);
       e.target.value = '';
       return

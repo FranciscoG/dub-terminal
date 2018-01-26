@@ -37,7 +37,8 @@ afk [message] - update your AFK message
 
 Pressing up/down traverses through history of commands (last 30)
 
-more to come!
+more commands to come!
+
 
 ## Development
 
@@ -49,15 +50,3 @@ uses [Rollup.js](https://rollupjs.org/guide/en) for bundling and building
 
 [Sass](http://sass-lang.com/) for css
 
-All **commands** must exported as a function which returns a `Promise` or `Promise.resolve` or `Promise.reject`
-
-Promise resolves must contain an object as an argument with the following keys
-```
-{
-  command: 'afk',  // metadata, the command that was just triggered
-  success: 'a success message to be displayed in the output',
-  warning: 'or an optional warning message'
-}
-```
-
-Promise rejects should just return a string that will be displayed in the results output.
