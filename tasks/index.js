@@ -1,9 +1,10 @@
 /******************************************************************
  * custom tasks
  */
-
+require('dotenv').config();
 const log = require("./colored-console.js");
-var extensionBuild = require(process.cwd() + "/tasks/extensions.js");
+const extensionBuild = require(process.cwd() + "/tasks/extensions.js");
+const makeIcons = require('./icons');
 
 // find out which task we're running
 var currentTask = process.argv[2];
@@ -19,6 +20,10 @@ var options = {
 };
 
 switch (currentTask) {
+  case "ext:icons":
+    makeIcons()
+    break;
+    
   case "ext:zip":
     extensionBuild(options);
     break;

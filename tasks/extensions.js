@@ -4,6 +4,7 @@
  */
 const path = require('path');
 const fs = require('fs-extra');
+const sharp = require('sharp');
 const doZip = require('./zip.js');
 const log = require('./colored-console.js');
 var pkg = require(process.cwd() + '/package.json');

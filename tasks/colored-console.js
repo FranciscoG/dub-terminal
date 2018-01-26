@@ -33,6 +33,9 @@ var log = {
     var args = Array.from(arguments);
     var returnStr = '';
     args.forEach((e)=>{
+      if (typeof e === 'object') {
+        e = JSON.stringify(e,null, 2);
+      }
       returnStr += green(e) + ' ';
     });
     console.info(returnStr);

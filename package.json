@@ -10,6 +10,7 @@
     "ext:zip": "node ./tasks ext:zip",
     "ext:deploy": "node ./tasks ext:deploy",
     "ext:build": "node ./tasks ext:build",
+    "ext:icons": "node ./tasks ext:icons",
     "start:firefox": "web-ext run --source-dir ./extensions/Firefox"
   },
   "repository": {
