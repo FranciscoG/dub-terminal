@@ -50,3 +50,14 @@ uses [Rollup.js](https://rollupjs.org/guide/en) for bundling and building
 
 [Sass](http://sass-lang.com/) for css
 
+## Extensions Development
+
+`npm run ext:build` - build the Chrome and Firefox individual extension folders
+
+`npm run start:firefox` - uses `web-ext` to begin a new instance of FF with the extension loaded
+
+`npm run ext:icons` - generate all the icons from the single largest 128x128 icon file 128.png
+
+`npm run ext:zip` - zip up the Chrome and Firefox extensions folders to prepare for deployment
+
+`npm run ext:deploy` - deploy both extensions via their respective APIs

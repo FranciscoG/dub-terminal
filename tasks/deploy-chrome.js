@@ -6,7 +6,7 @@ const log = require('./colored-console.js');
  * setup vars from env or json file
  */
 
-// default to env
+// using dotenv lib to load vars
 var private = {
   CHROME_EXT_ITEM_ID : process.env.CHROME_EXT_ITEM_ID,
   CLIENT_ID : process.env.CLIENT_ID,
@@ -14,26 +14,6 @@ var private = {
   REFRESH_TOKEN : process.env.REFRESH_TOKEN
 };
 
-// cause I'm lazy and dont want to type out a bunch of large env vars on the command line, 
-// I also put them in a git-ignored json file that overrides env vars
-try {
-  private = require(process.cwd() + '/private.json');
-} catch(ex) {
-  // if json didnt work, we need to check if env vars were set at least
-  let failure = false;
-  
-  for(let key in private) {
-    let p = private[key];
-    if (typeof p === 'undefined' || p === null || p === '') {
-      log.error(`missing env variable: ${key}`);
-      failure = true;
-    }
-  }
-
-  if (failure) {
-    process.exit(1);
-  }
-}
 
 /*******************************************************************
  * Upload extension package

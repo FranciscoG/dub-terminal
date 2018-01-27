@@ -3,8 +3,9 @@
  */
 require('dotenv').config();
 const log = require("./colored-console.js");
-const extensionBuild = require(process.cwd() + "/tasks/extensions.js");
-const makeIcons = require('./icons');
+const extensionBuild = require("./extensions.js");
+const deployExt = require("./deploy-ext.js");
+const makeIcons = require('./icons.js');
 
 // find out which task we're running
 var currentTask = process.argv[2];
@@ -29,7 +30,6 @@ switch (currentTask) {
     break;
 
   case "ext:deploy":
-    var deployExt = require(process.cwd() + "/tasks/deploy-ext.js");
     extensionBuild(options);
     deployExt(arg);
     break;

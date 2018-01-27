@@ -24,7 +24,7 @@ function signFFext(){
 
   var successResponse = "Your add-on has been submitted for review. It passed validation but could not be automatically signed because this is a listed add-on";
 
-  if (output.indexOf(successResponse) > 0) {
+  if (output.indexOf(successResponse) >= 0) {
     log.info('success');
   }
 }

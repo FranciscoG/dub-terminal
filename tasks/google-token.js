@@ -14,8 +14,6 @@ function getAccessTokenFromCode() {
    * 
    * CODE is a ONE TIME USE item so you must always pass it via env variable
    *
-   * CLIENT_ID and CLIENT_SECRET can both be passed via env vars or inside
-   * private.json file in the root of the repo
    */
 
 
@@ -24,28 +22,6 @@ function getAccessTokenFromCode() {
     CLIENT_SECRET : process.env.CLIENT_SECRET,
     CODE : process.env.CODE
   };
-
-  try {
-    // if local private.json exists then we can use that instead of env
-    let _priv = require(process.cwd() + '/private.json');
-    private.CLIENT_ID = _priv.CLIENT_ID;
-    private.CLIENT_SECRET = _priv.CLIENT_SECRET;
-  } catch(ex) {
-    // if json didnt work, we need to check if env vars were set at least
-    let failure = false;
-    
-    for(let key in private) {
-      let p = private[key];
-      if (typeof p === 'undefined' || p === null || p === '') {
-        log.error(`missing: ${key}`);
-        failure = true;
-      }
-    }
-
-    if (failure) {
-      process.exit(1);
-    }
-  }
   
   var options = {
     url: 'https://accounts.google.com/o/oauth2/token',

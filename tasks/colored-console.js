@@ -1,4 +1,4 @@
-// what can I say, I like fancy colors in my console ;-)
+// what can I say, I like fancy colors and emojis in my console ;-)
 const chalk = require('chalk');
 const boldRed = chalk.bold.red;
 const yellow = chalk.yellow;
@@ -14,6 +14,7 @@ var emoji = {
   warn: "⚠️",
   x : "❌",
   exclamation: "❗️",
+  lightbulb: "💡"
 };
 
 var log = {
@@ -21,24 +22,22 @@ var log = {
   // show all console.error in bold red
   error : function(){
     var args = Array.from(arguments);
-    var returnStr = '';
-    args.forEach((e)=>{
-      returnStr += boldRed(e) + ' ';
-    });
-    console.error(`${emoji.x}  ${returnStr}`);
+    var returnStr = args.reduce((acc,val)=>{
+      return acc += boldRed(val) + ' ';
+    },'');
+    console.log(`${emoji.x}  ${returnStr}`);
   },
 
   // show all console.info in green
   info : function(){
     var args = Array.from(arguments);
-    var returnStr = '';
-    args.forEach((e)=>{
+    var returnStr = args.reduce((acc,val)=>{
       if (typeof e === 'object') {
         e = JSON.stringify(e,null, 2);
       }
-      returnStr += green(e) + ' ';
-    });
-    console.info(returnStr);
+      return acc += green(val) + ' ';
+    }, '');
+    console.log(`${emoji.lightbulb}  ${returnStr}`);
   },
 
   // console dir does NOT pretty print, so this will
@@ -52,11 +51,10 @@ var log = {
   // show warn in yellow
   warn : function() {
     var args = Array.from(arguments);
-    var returnStr = '';
-    args.forEach((e)=>{
-      returnStr += yellow(e) + ' ';
-    });
-    console.error(`${emoji.warn}  ${returnStr}`);
+    var returnStr = args.reduce((acc,val)=>{
+      return acc += yellow(val) + ' ';
+    },'');
+    console.log(`${emoji.warn}  ${returnStr}`);
   }
 
 };

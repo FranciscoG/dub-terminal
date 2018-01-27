@@ -3,7 +3,7 @@
 /**
  * Pure JS version of jQuery's $.getScript
  * 
- * @param {string} source url/path to JS file
+ * @param {string} source url or path to JS file
  * @param {function} callback function to run after script is loaded
  */
 function getScript(source, callback) {
